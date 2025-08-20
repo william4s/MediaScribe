@@ -1,22 +1,22 @@
-# MediaScribe - 视频生成图文混排讲义工具
+# MediaScribe - Image-and-Text Mixed Lecture Notes Generator from Video
 
-这是一个基于Python的视频内容分析工具，可以将视频转换为结构化的图文混排讲义。
+This is a Python-based video content analysis tool powered by LLM and Whisper, capable of generating illustrated and text-integrated summaries from videos.
 
 ## 功能特性
 
-### 当前实现（低难度）
+### 当前实现
 - ✅ 使用ffmpeg进行音视频分流
 - ✅ 调用Whisper ASR服务进行语音转文字
 - ✅ 基于大语言模型的智能摘要生成
 - ✅ 分段处理和时间标记
 - ✅ JSON格式输出和Markdown报告生成
 
-### 规划功能（中难度）
+### 规划功能
 - 🔄 视频帧提取和去重
 - 🔄 图像向量化和相似度分析
 - 🔄 图片裁剪和优化
 
-### 规划功能（高难度）
+### 规划功能
 - 🔄 并发处理和性能优化
 - 🔄 图文混排PDF报告生成
 - 🔄 腾讯文档在线集成
@@ -24,8 +24,8 @@
 ## 系统要求
 
 - Python 3.10+
-- FFmpeg (命令行工具)
-- Whisper ASR服务 (http://localhost:8760)
+- FFmpeg 
+- Whisper ASR服务 
 - LLM API服务 (支持OpenAI格式)
 
 ## 安装
@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 ```bash
 export WHISPER_URL="http://localhost:8760"
-export LLM_URL="http://192.168.1.3:8000"
+export LLM_URL="http://localhost:8000"
 export LLM_API_KEY="sk-kfccrazythursdayvme50"
 export LLM_MODEL="qwen3"
 ```
@@ -78,7 +78,7 @@ python media_scribe.py test/500001644709044-1-192.mp4 -o my_output
 ```bash
 python media_scribe.py test/500001644709044-1-192.mp4 \
   --whisper-url http://localhost:8760 \
-  --llm-url http://192.168.1.3:8000
+  --llm-url http://localhost:8000
 ```
 
 ### 调试模式
@@ -144,7 +144,7 @@ MediaScribe/
 ### Whisper ASR服务
 需要部署支持以下接口的Whisper服务：
 - `POST /asr` - 语音转文字
-- `GET /health` - 健康检查
+- `GET /detect-language` - 检测语言
 
 ### LLM服务
 需要支持OpenAI格式的聊天完成API：
@@ -194,12 +194,12 @@ pytest --cov=src
 
 ## 许可证
 
-[指定许可证]
-
+[MIT License](https://github.com/william4s/MediaScribe/blob/main/LICENSE)
 ## 贡献
 
 欢迎提交Issue和Pull Request！
 
 ## 联系方式
 
-[联系信息]
+Weichun Shi
+Email:shiweihcun24@mails.ucas.ac.cn
