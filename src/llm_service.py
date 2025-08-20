@@ -106,66 +106,58 @@ class LLMService:
         
         return self.chat_completion(messages, temperature=0.3)
     
-    def segment_and_summarize(self, text, segments_info):
+    def generate_overall_summary(self, text):
         """
-        根据时间段信息对文本进行分段并生成摘要
+        生成整体摘要（仅发送纯文字）
         
         Args:
-            text: 完整转录文本
-            segments_info: 分段信息列表
+            text: 完整转录文本（纯文字）
             
         Returns:
-            dict: 分段和摘要结果
+            str: 整体摘要
         """
-        system_prompt = """你是一个专业的视频内容分析助手。用户会提供视频的完整转录文本和分段信息，请你：
-
-1. 为整个内容生成一个总体摘要
-2. 为每个时间段生成相应的摘要
-3. 确保摘要准确反映该时间段的主要内容
-4. 返回严格按照以下JSON格式的结果：
-
-{
-  "overall_summary": "整体摘要内容",
-  "segments": [
-    {
-      "start_time": 开始时间（秒）,
-      "end_time": 结束时间（秒）,
-      "text": "该段的原始文本",
-      "summary": "该段的摘要"
-    }
-  ]
-}
-
-要求：
-- 摘要要简洁明了，突出重点
-- 保持原文的逻辑结构
-- 每段摘要长度控制在50-100字
-- 总体摘要长度控制在200字以内
-- 必须返回有效的JSON格式"""
-
-        user_content = f"""完整转录文本：
-{text}
-
-分段信息：
-{json.dumps(segments_info, ensure_ascii=False, indent=2)}
-
-请按照要求返回JSON格式的分析结果。"""
-
         messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_content}
+            {
+                "role": "system",
+                "content": "你是一个专业的视频内容摘要助手。请用中文为用户提供的文本生成简洁、准确的摘要，摘要长度控制在150-250字之间。要求突出重点内容，保持逻辑清晰。"
+            },
+            {
+                "role": "user",
+                "content": f"请为以下视频转录文本生成中文摘要：\n\n{text}"
+            }
         ]
         
-        response = self.chat_completion(messages, temperature=0.3)
+        return self.chat_completion(messages, temperature=0.3)
+    
+    def generate_segment_summary(self, segment_text, start_time, end_time):
+        """
+        生成单个分段的摘要
         
-        try:
-            # 尝试解析JSON响应
-            result = json.loads(response)
-            return result
-        except json.JSONDecodeError:
-            self.logger.warning("LLM返回的不是有效JSON，尝试提取...")
-            # 如果不是有效JSON，尝试简单处理
-            return {
-                "overall_summary": response[:200] + "..." if len(response) > 200 else response,
-                "segments": []
+        Args:
+            segment_text: 分段文本（纯文字）
+            start_time: 开始时间
+            end_time: 结束时间
+            
+        Returns:
+            str: 分段摘要
+        """
+        time_info = f"时间段：{self._format_time(start_time)} - {self._format_time(end_time)}"
+        
+        messages = [
+            {
+                "role": "system",
+                "content": "你是一个专业的视频内容分析助手。请用中文为用户提供的文本段落生成简洁摘要，摘要长度控制在50-100字之间。要求突出该段落的核心内容。"
+            },
+            {
+                "role": "user",
+                "content": f"{time_info}\n\n请为以下文本段落生成中文摘要：\n\n{segment_text}"
             }
+        ]
+        
+        return self.chat_completion(messages, temperature=0.3)
+    
+    def _format_time(self, seconds):
+        """格式化时间显示"""
+        minutes = int(seconds // 60)
+        seconds = int(seconds % 60)
+        return f"{minutes:02d}:{seconds:02d}"

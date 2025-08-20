@@ -526,3 +526,30 @@
 2025-08-20 11:24:10,054 - __main__ - INFO -   总结语言: zh-CN
 2025-08-20 11:24:10,054 - __main__ - INFO - ==================================================
 2025-08-20 11:24:10,054 - __main__ - INFO - 所有处理步骤完成!
+2025-08-20 15:34:06,938 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-20 15:34:13,200 - src.video_processor - INFO - 音频提取成功: output/500001644709044-1-192.mp3
+2025-08-20 15:34:13,201 - src.asr_service - INFO - 开始转录音频: output/500001644709044-1-192.mp3
+2025-08-20 15:35:23,134 - src.asr_service - INFO - 转录成功，检测到语言: en
+2025-08-20 15:35:23,134 - src.asr_service - INFO - 转录文本长度: 12042
+2025-08-20 15:35:23,134 - src.asr_service - INFO - 分段数量: 305
+2025-08-20 15:35:23,173 - src.summary_generator - INFO - 开始生成摘要和分段处理...
+2025-08-20 15:35:23,173 - src.summary_generator - INFO - 处理语言: en, 文本长度: 12042, 分段数: 305
+2025-08-20 15:37:23,182 - src.llm_service - ERROR - LLM请求失败: HTTPConnectionPool(host='192.168.1.3', port=8000): Read timed out. (read timeout=120)
+2025-08-20 15:37:23,182 - src.summary_generator - ERROR - 摘要生成失败: LLM请求失败: HTTPConnectionPool(host='192.168.1.3', port=8000): Read timed out. (read timeout=120)
+2025-08-20 15:37:23,182 - src.summary_generator - WARNING - 使用备用摘要生成方案
+2025-08-20 16:01:47,471 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-20 16:01:54,939 - src.video_processor - INFO - 音频提取成功: output/500001644709044-1-192.mp3
+2025-08-20 16:01:54,940 - src.asr_service - INFO - 开始转录音频: output/500001644709044-1-192.mp3
+2025-08-20 16:03:04,892 - src.asr_service - INFO - 转录成功，检测到语言: en
+2025-08-20 16:03:04,893 - src.asr_service - INFO - 转录文本长度: 12042
+2025-08-20 16:03:04,893 - src.asr_service - INFO - 分段数量: 305
+2025-08-20 16:03:04,926 - src.summary_generator - INFO - 开始生成摘要和分段处理...
+2025-08-20 16:03:04,926 - src.summary_generator - INFO - 处理语言: en, 文本长度: 12042, 原始分段数: 305
+2025-08-20 16:03:04,926 - src.summary_generator - INFO - 合并后分段数: 6
+2025-08-20 16:03:15,616 - src.summary_generator - INFO - 正在处理第 1/6 段...
+2025-08-20 16:03:17,531 - src.summary_generator - INFO - 正在处理第 2/6 段...
+2025-08-20 16:03:20,223 - src.summary_generator - INFO - 正在处理第 3/6 段...
+2025-08-20 16:03:22,765 - src.summary_generator - INFO - 正在处理第 4/6 段...
+2025-08-20 16:03:24,929 - src.summary_generator - INFO - 正在处理第 5/6 段...
+2025-08-20 16:03:26,540 - src.summary_generator - INFO - 正在处理第 6/6 段...
+2025-08-20 16:03:28,546 - src.summary_generator - INFO - 摘要生成完成
