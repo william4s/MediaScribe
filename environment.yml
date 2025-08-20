@@ -1,0 +1,29 @@
+name: mediascribe
+
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Conda packages
+  - python=3.10
+  - ffmpeg          # The command-line tool
+  - pytorch
+  - torchvision
+  - faiss-cpu
+  - yt-dlp
+  - openai
+  - opencv
+  - pillow
+  - transformers
+  - numpy
+  - scikit-learn
+  - pymupdf
+  - requests
+  - pip
+
+  # Pip packages
+  - pip:
+    - openai-whisper
+    - ffmpeg-python
