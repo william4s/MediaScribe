@@ -1,0 +1,15 @@
+# Web服务器依赖
+fastapi
+uvicorn[standard]
+pydantic
+requests
+
+# 模型与数据处理依赖
+# 让pip自动寻找最新的兼容版本
+transformers
+peft
+torchvision
+pillow
+accelerate # 添加 accelerate 库
+einops
+timm

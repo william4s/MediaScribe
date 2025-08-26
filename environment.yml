@@ -1,20 +1,15 @@
 name: mediascribe
-
 channels:
-  - pytorch
-  - conda-forge
+  - pytorch          # PyTorch 官方源，优先
+  - conda-forge      # 其次是 conda-forge，作为主要的包来源
   - defaults
-
 dependencies:
   # Conda packages
   - python=3.10
-  - ffmpeg          # The command-line tool
-  - pytorch
-  - torchvision
-  - faiss-cpu
+  - ffmpeg           # The one and only command-line tool
+  - pytorch          # Let conda handle the main library
   - yt-dlp
   - openai
-  - opencv
   - pillow
   - transformers
   - numpy
@@ -22,8 +17,4 @@ dependencies:
   - pymupdf
   - requests
   - pip
-
-  # Pip packages
-  - pip:
-    - openai-whisper
-    - ffmpeg-python
+  

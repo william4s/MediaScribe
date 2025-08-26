@@ -553,3 +553,51 @@
 2025-08-20 16:03:24,929 - src.summary_generator - INFO - 正在处理第 5/6 段...
 2025-08-20 16:03:26,540 - src.summary_generator - INFO - 正在处理第 6/6 段...
 2025-08-20 16:03:28,546 - src.summary_generator - INFO - 摘要生成完成
+2025-08-22 15:46:58,959 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:47:16,927 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:47:16,932 - src.video_processor - ERROR - FFmpeg处理失败: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'mp3', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.mp3']' returned non-zero exit status 127.
+2025-08-22 15:47:16,932 - src.video_processor - ERROR - 错误输出: ffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory
+
+2025-08-22 15:48:34,101 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:48:34,105 - src.video_processor - ERROR - FFmpeg处理失败: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'mp3', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.mp3']' returned non-zero exit status 127.
+2025-08-22 15:48:34,106 - src.video_processor - ERROR - 错误输出: ffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory
+
+2025-08-22 15:48:59,805 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:48:59,810 - src.video_processor - ERROR - FFmpeg处理失败: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'mp3', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.mp3']' returned non-zero exit status 127.
+2025-08-22 15:48:59,810 - src.video_processor - ERROR - 错误输出: ffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory
+
+2025-08-22 15:52:31,626 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:52:31,631 - src.video_processor - ERROR - FFmpeg处理失败: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'mp3', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.mp3']' returned non-zero exit status 127.
+2025-08-22 15:52:31,631 - src.video_processor - ERROR - 错误输出: ffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory
+
+2025-08-22 15:53:19,050 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:53:19,055 - src.video_processor - WARNING - MP3 编码失败，尝试 WAV 格式: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'libmp3lame', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.mp3']' returned non-zero exit status 127.
+2025-08-22 15:53:19,059 - src.video_processor - ERROR - FFmpeg处理失败: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'pcm_s16le', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.wav']' returned non-zero exit status 127.
+2025-08-22 15:53:19,059 - src.video_processor - ERROR - 错误输出: ffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory
+
+2025-08-22 15:53:21,845 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:53:21,849 - src.video_processor - WARNING - MP3 编码失败，尝试 WAV 格式: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'libmp3lame', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.mp3']' returned non-zero exit status 127.
+2025-08-22 15:53:21,854 - src.video_processor - ERROR - FFmpeg处理失败: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'pcm_s16le', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.wav']' returned non-zero exit status 127.
+2025-08-22 15:53:21,854 - src.video_processor - ERROR - 错误输出: ffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory
+
+2025-08-22 15:58:31,014 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:58:54,756 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 15:58:54,761 - src.video_processor - ERROR - FFmpeg处理失败: Command '['ffmpeg', '-i', 'test/500001644709044-1-192.mp4', '-vn', '-acodec', 'mp3', '-ar', '16000', '-ac', '1', '-y', 'output/500001644709044-1-192.mp3']' returned non-zero exit status 127.
+2025-08-22 15:58:54,761 - src.video_processor - ERROR - 错误输出: ffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory
+
+2025-08-22 16:00:53,374 - src.video_processor - INFO - 开始提取音频: test/500001644709044-1-192.mp4 -> output/500001644709044-1-192.mp3
+2025-08-22 16:01:01,368 - src.video_processor - INFO - 音频提取成功: output/500001644709044-1-192.mp3
+2025-08-22 16:01:01,368 - src.asr_service - INFO - 开始转录音频: output/500001644709044-1-192.mp3
+2025-08-22 16:02:12,965 - src.asr_service - INFO - 转录成功，检测到语言: en
+2025-08-22 16:02:12,965 - src.asr_service - INFO - 转录文本长度: 12042
+2025-08-22 16:02:12,965 - src.asr_service - INFO - 分段数量: 305
+2025-08-22 16:02:13,004 - src.summary_generator - INFO - 开始生成摘要和分段处理...
+2025-08-22 16:02:13,004 - src.summary_generator - INFO - 处理语言: en, 文本长度: 12042, 原始分段数: 305
+2025-08-22 16:02:13,005 - src.summary_generator - INFO - 合并后分段数: 6
+2025-08-22 16:02:19,874 - src.summary_generator - INFO - 正在处理第 1/6 段...
+2025-08-22 16:02:21,252 - src.summary_generator - INFO - 正在处理第 2/6 段...
+2025-08-22 16:02:23,193 - src.summary_generator - INFO - 正在处理第 3/6 段...
+2025-08-22 16:02:24,778 - src.summary_generator - INFO - 正在处理第 4/6 段...
+2025-08-22 16:02:26,114 - src.summary_generator - INFO - 正在处理第 5/6 段...
+2025-08-22 16:02:27,214 - src.summary_generator - INFO - 正在处理第 6/6 段...
+2025-08-22 16:02:28,739 - src.summary_generator - INFO - 摘要生成完成

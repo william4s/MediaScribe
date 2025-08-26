@@ -1,3 +1,4 @@
 *.pyc
 mediascribe.log
 output
+service/clip_service/model
