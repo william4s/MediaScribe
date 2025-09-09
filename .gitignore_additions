@@ -1,7 +1,4 @@
-*.pyc
-mediascribe.log
-output
-service/clip_service/model# 日志文件
+# 日志文件
 *.log
 mediascribe.log
 visual_test.log

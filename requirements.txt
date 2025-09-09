@@ -8,11 +8,11 @@ pathlib2>=2.3.7
 # 视频处理
 ffmpeg-python>=0.2.0
 
-# 图像处理（为中高难度功能预留）
+# 图像处理
 Pillow>=10.0.0
 opencv-python>=4.8.0
 
-# 向量计算（为中高难度功能预留）
+# 向量计算
 numpy>=1.24.0
 scikit-learn>=1.3.0
 faiss-cpu>=1.7.4

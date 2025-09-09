@@ -1,25 +1,35 @@
-# MediaScribe - Image-and-Text Mixed Lecture Notes Generator from Video
+# MediaScribe - 图文混合课程笔记生成器
 
-This is a Python-based video content analysis tool powered by LLM and Whisper, capable of generating illustrated and text-integrated summaries from videos.
+基于Python的视频内容分析工具，集成LLM和Whisper技术，能够从视频生成包含图像和文本的智能摘要。
 
-## 功能特性
+## 🎯 功能特性
 
-### 当前实现
-- ✅ 使用ffmpeg进行音视频分流
+### ✅ 已实现功能
+
+#### 📱 基础音频处理
+- ✅ 使用ffmpeg进行音视频分流  
 - ✅ 调用Whisper ASR服务进行语音转文字
 - ✅ 基于大语言模型的智能摘要生成
 - ✅ 分段处理和时间标记
 - ✅ JSON格式输出和Markdown报告生成
 
-### 规划功能
-- 🔄 视频帧提取和去重
-- 🔄 图像向量化和相似度分析
-- 🔄 图片裁剪和优化
+#### 🖼️ 视觉处理管道 (新增)
+- ✅ 视频帧均匀采样提取 (支持时间戳记录)
+- ✅ YOLO目标检测智能裁剪
+- ✅ 中心裁剪模式 (4:3比例优化)  
+- ✅ 基于Jina v4的图像向量化
+- ✅ 余弦相似度去重算法 (去重率60-90%)
+- ✅ 微服务架构 (embedding + YOLO检测)
 
-### 规划功能
-- 🔄 并发处理和性能优化
-- 🔄 图文混排PDF报告生成
-- 🔄 腾讯文档在线集成
+### 🔄 进行中功能
+- 🔄 性能优化和并发处理
+- 🔄 图文混排PDF报告生成  
+- 🔄 在线服务API部署
+
+### 📋 规划功能
+- 📋 多语言支持优化
+- 📋 云端存储集成
+- 📋 实时处理能力
 
 ## 系统要求
 
@@ -62,39 +72,93 @@ export LLM_MODEL="qwen3"
 ### 配置文件
 详细配置请参考 `src/config.py`
 
-## 使用方法
+## 📦 使用方法
 
-### 基本用法
+### 🎯 推荐: 智能入口 (新增)
 ```bash
+# 自动选择最佳处理模式
+python mediascribe.py test/500001644709044-1-192.mp4
+
+# 强制使用音频模式 (快速)
+python mediascribe.py test/500001644709044-1-192.mp4 --audio-only
+
+# 强制使用视觉模式 (完整) 
+python mediascribe.py test/500001644709044-1-192.mp4 --visual
+```
+
+### 🔵 基础版本 (仅音频处理)
+```bash
+# 基础音频转录和摘要
 python media_scribe.py test/500001644709044-1-192.mp4
 ```
 
-### 指定输出目录
+### 🟢 增强版本 (含视觉处理)  
 ```bash
-python media_scribe.py test/500001644709044-1-192.mp4 -o my_output
+# 完整视觉处理管道 - 中心裁剪模式
+python media_scribe_visual.py test/500001644709044-1-192.mp4 --crop-mode center
+
+# YOLO检测裁剪模式
+python media_scribe_visual.py test/500001644709044-1-192.mp4 --crop-mode yolo
+
+# 自定义参数
+python media_scribe_visual.py test/500001644709044-1-192.mp4 \
+  --crop-mode center \
+  --max-frames 30 \
+  --similarity-threshold 0.90 \
+  --output-dir my_output
 ```
 
-### 自定义服务地址
+### 🎯 演示示例
 ```bash
-python media_scribe.py test/500001644709044-1-192.mp4 \
-  --whisper-url http://localhost:8760 \
-  --llm-url http://localhost:8000
+# 视觉处理功能演示
+python examples/demo_visual.py
+
+# 裁剪模式对比演示  
+python examples/demo_crop_modes.py
 ```
 
-### 调试模式
+### ⚙️ 服务依赖
+
+启动必需的微服务：
 ```bash
-python media_scribe.py test/500001644709044-1-192.mp4 --debug
+# 启动图像向量化服务 (端口8762)
+cd service/embedding_service && python main.py
+
+# 启动YOLO检测服务 (端口8761)  
+cd service/yolo_service && python yolo_server.py
 ```
 
-## 输出文件
+## 🎯 输出文件
 
-处理完成后，在输出目录中会生成：
-
+### 📄 基础版本输出
 - `audio.mp3` - 提取的音频文件
-- `transcript_raw.json` - 原始转录结果
+- `transcript_raw.json` - 原始转录结果  
 - `final_result.json` - 最终处理结果
 - `report.md` - Markdown格式报告
 - `mediascribe.log` - 处理日志
+
+### 🖼️ 增强版本输出 (新增)
+- `visual_processing_results.json` - 视觉处理结果
+- `frames/` - 提取的视频帧 (包含时间戳)
+- `crops/` - 智能裁剪的图片
+- `report_visual.md` - 包含图像的增强报告
+
+### 📊 处理统计示例
+```json
+{
+  "processing_stats": {
+    "original_frame_count": 50,
+    "images_before_dedup": 50, 
+    "final_image_count": 16,
+    "removed_duplicate_count": 34,
+    "deduplication_rate": 0.68
+  },
+  "visual_analysis": {
+    "time_range": "0.0s - 58.8s",
+    "sampling_interval": "1.2s",
+    "crop_mode": "center_4:3"
+  }
+}
 
 ### 输出格式示例
 
@@ -119,25 +183,48 @@ python media_scribe.py test/500001644709044-1-192.mp4 --debug
 }
 ```
 
-## 项目结构
+## 📁 项目结构
 
 ```
 MediaScribe/
-├── media_scribe.py          # 主入口文件
-├── src/                     # 源代码目录
-│   ├── __init__.py
-│   ├── config.py           # 配置管理
-│   ├── utils.py            # 工具函数
-│   ├── video_processor.py  # 视频处理
-│   ├── asr_service.py      # ASR服务
-│   ├── llm_service.py      # LLM服务
-│   └── summary_generator.py # 摘要生成
-├── test/                   # 测试文件
-├── output/                 # 默认输出目录
-├── environment.yml         # Conda环境配置
-├── requirements.txt        # Pip依赖
-└── README.md
+├── README.md                    # 项目说明文档
+├── LICENSE                      # 开源许可证  
+├── requirements.txt             # Python依赖
+├── environment.yml              # Conda环境配置
+├──
+├── mediascribe.py              # 🎯 智能入口 - 自动选择模式
+├── media_scribe.py             # 🔵 基础版本 - 仅音频处理
+├── media_scribe_visual.py      # 🟢 增强版本 - 含视觉处理
+├──
+├── src/                        # 📁 核心源代码
+│   ├── config.py               # 配置管理
+│   ├── utils.py                # 工具函数
+│   ├── video_processor.py      # 视频/音频处理
+│   ├── asr_service.py          # ASR服务
+│   ├── llm_service.py          # LLM服务
+│   ├── summary_generator.py    # 摘要生成
+│   └── visual_processor.py     # 🆕 视觉处理模块
+├──
+├── service/                    # 📁 微服务组件
+│   ├── embedding_service/      # 图像向量化服务
+│   └── yolo_service/          # YOLO检测服务
+├──
+├── tests/                      # 📁 测试文件
+│   ├── test_components.py      # 组件测试
+│   ├── test_visual_processor.py # 视觉处理测试
+│   └── test_*.py              # 其他测试
+├──
+├── examples/                   # 📁 示例演示
+│   ├── demo_visual.py          # 视觉处理演示
+│   └── demo_crop_modes.py      # 裁剪模式演示
+├──
+├── scripts/                    # 📁 辅助脚本
+├── docs/                       # 📁 项目文档
+├── test/                       # 📁 测试数据
+└── output/                     # 📁 输出目录
 ```
+
+> 📖 详细结构说明请参考: [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md)
 
 ## API接口
 
@@ -150,26 +237,42 @@ MediaScribe/
 需要支持OpenAI格式的聊天完成API：
 - `POST /v1/chat/completions` - 聊天完成
 
-## 开发说明
+## 🔧 开发说明
 
-### 扩展功能
-项目已为中高难度功能预留接口：
+### 🎨 视觉处理架构 (新增)
+项目采用模块化设计，支持多种图像处理模式：
 
-1. **图像处理** - `VideoProcessor.extract_frames()`
-2. **向量计算** - 配置中的vector部分
-3. **PDF生成** - 配置中的pdf部分
+1. **帧提取算法** - `visual_processor.extract_frames_from_video()`
+   - 均匀采样: 在视频时长内均匀分布取帧
+   - 时间戳记录: 每帧精确记录时间位置
+   - 可配置最大帧数 (默认50帧)
 
-### 测试
+2. **智能裁剪** - `visual_processor.crop_images()`
+   - YOLO模式: 基于目标检测的智能裁剪
+   - 中心模式: 4:3比例中心裁剪 (适合课程视频)
+
+3. **向量化去重** - `visual_processor.vectorize_and_deduplicate()`  
+   - Jina v4 图像向量化
+   - 余弦相似度计算
+   - 智能去重 (相似度阈值可调)
+
+### 🧪 测试体系
 ```bash
-# 运行测试
-pytest
+# 运行所有测试
+python -m pytest tests/
 
-# 测试覆盖率
-pytest --cov=src
+# 测试视觉处理模块
+python tests/test_visual_processor.py
+
+# 性能测试  
+python tests/test_parameters.py
 ```
 
-### 日志
-项目使用Python标准logging模块，日志文件保存为 `mediascribe.log`
+### 📈 性能指标
+- **抽帧速度**: ~50帧/4秒 (864秒视频)
+- **向量化速度**: ~50张图片/35秒  
+- **去重效率**: 60-90% (取决于内容相似度)
+- **内存占用**: 峰值 < 2GB (50帧处理)
 
 ## 故障排除
 

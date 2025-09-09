@@ -53,13 +53,26 @@ DEFAULT_CONFIG = {
         'timeline_interval': 60
     },
     
-    # 图像处理配置（为中高难度功能预留）
+    # 图像处理配置
     'image': {
-        'extract_fps': 1,
-        'similarity_threshold': 0.85,
-        'max_frames_per_segment': 10,
+        'extract_fps': 1.0,  # 提高到1秒1帧
+        'similarity_threshold': 0.95,  # 提升到95%
+        'max_frames_per_segment': 50,
+        'uniform_sampling': True,  # 启用均匀采样
+        'record_timestamps': True,  # 记录时间戳
         'image_format': 'jpg',
-        'image_quality': 85
+        'image_quality': 85,
+        'crop_confidence_threshold': 0.5,
+        'crop_mode': 'center',  # 'center', 'yolo', 'none'
+        'center_crop_ratios': ['4:3'],  # 中心裁剪比例
+        'enable_smart_cropping': True
+    },
+    
+    # 服务配置
+    'services': {
+        'embedding_service_url': 'http://localhost:8762',
+        'yolo_service_url': 'http://localhost:8761',
+        'timeout': 120
     },
     
     # 向量计算配置（为中高难度功能预留）
